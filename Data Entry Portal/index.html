@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Database Entry</title>
+    <link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet">
+    <script src="https://www.gstatic.com/firebasejs/5.10.0/firebase.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/5.10.0/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/5.10.0/firebase-database.js"></script>
+    <link rel="shortcut icon" href="favicon.ico?v1" type="image/x-icon"/> 
+    <script src="firebase.js"></script>
+    <link rel="stylesheet" href="base.css">
+</head>
+<body>
+        <div class="container">  
+                <div id="contact">
+                  <h3>PollAssist'19 Database Entry</h3>
+                  <fieldset>
+                    <input id="latitude" placeholder="Latitude" type="number" tabindex="1" step = ".0000000001" required>
+                  </fieldset>
+                  <fieldset>  
+                    <input id="longitude" placeholder="Longitude" type="number" tabindex="2" step = ".00000000001" required>
+                  </fieldset>
+                  <fieldset>
+                    <input id="number" placeholder="Booth Number" type="number" tabindex="3" required>
+                  </fieldset>
+                  <fieldset>
+                    <input id="status" placeholder="Status" type="text" tabindex="4" required>
+                  </fieldset>
+                  <fieldset>
+                    <input id="title" type ="text" id="title" placeholder="Title" tabindex="5" required></inout>
+                  </fieldset>
+                  <fieldset>
+                    <center><button class="butt" onclick="entrys()" name="submit" >Submit</button></center>
+                  </fieldset>
+                </div>
+        </div>
+        <!-- <script src="entry.js"></script> -->
+<script>
+       function entrys()
+{
+    var l = document.getElementById('latitude').value;
+    var latitude = parseFloat(l);
+    var lg = document.getElementById('longitude').value;
+    var longitude = parseFloat(lg);
+    var number = document.getElementById('number').value;
+    var status = document.getElementById('status').value;
+    var boothnum = parseInt(number);
+    console.log('boothnum');
+    var title = document.getElementById('title').value;
+
+    if(entrys == "")
+    {
+        window.alert('Please Fill in the data');
+    }
+    else
+    {
+        firebase.database().ref('LoadPlace/' + number).set({
+            l : latitude,
+            lg : longitude,
+            number : boothnum,
+            status : status,
+            title: title
+        });
+        window.alert('Successfully Sent!');
+        document.getElementById('latitude').value = "";
+        document.getElementById('longitude').value = "";
+        document.getElementById('number').value = "";
+        document.getElementById('status').value = "";
+        document.getElementById('title').value = "";
+    }
+}
+</script>
+</body>
+</html>
